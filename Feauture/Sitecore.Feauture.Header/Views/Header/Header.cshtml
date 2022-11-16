@@ -1,0 +1,77 @@
+﻿
+@using Sitecore.Foundation.Common
+@using Sitecore.Mvc
+@model Sitecore.Feauture.Header.Models.HeaderModel
+@if (Sitecore.Context.PageMode.IsExperienceEditor)
+{
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                @Html.Raw(@Model.DesktopLogo)
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    @foreach (var menu in Model.HeaderMenuList)
+                    {
+                        if (menu.ShowAsButton == "1")
+                        {
+                            <li class="nav-item cta mr-md-2">
+                                <a href="@menu.MenuLink" class="nav-link">@Html.Sitecore().Field(BasePage.NavigationMenu.Field.NavigationName.ToString(),menu)</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a href="@menu.MenuLink" @menu.ActiveMenu class="nav-link">@Html.Sitecore().Field(BasePage.NavigationMenu.Field.NavigationName.ToString(), menu)</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+}
+else
+{
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            @if (!string.IsNullOrEmpty(Model.DesktopLogo))
+            {
+                <a class="navbar-brand" href="index.html">
+                    @Html.Raw(@Model.DesktopLogo)
+                </a>
+            }
+         
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            @if (Model.HeaderMenuList != null)
+            {
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        @foreach (var menu in Model.HeaderMenuList)
+                        {
+                            if (menu.ShowAsButton == "1")
+                            {
+                                <li class="nav-item cta mr-md-2">
+                                    <a href="@menu.MenuLink" class="nav-link">@menu.MenuName</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a href="@menu.MenuLink" @menu.ActiveMenu class="nav-link">@menu.MenuName</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+ 
+        </div>
+    </nav> 
+}

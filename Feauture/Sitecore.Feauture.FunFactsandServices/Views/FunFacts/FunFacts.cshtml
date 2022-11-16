@@ -1,0 +1,122 @@
+﻿@using Sitecore.Mvc.Presentation;
+@using Sitecore.Data.Fields;
+@using Sitecore.Data.Items;
+@using Sitecore.Foundation.Extension;
+@using Sitecore.Foundation.Extension.Extension
+@using Sitecore.Mvc;
+@model RenderingModel
+@{
+    MultilistField serviceslist = Model.Item.Fields[Template.FunFacts.Field.FunFactsServicesList];
+    Item[] ServicesList = serviceslist.GetItems();
+   
+}
+@if (Sitecore.Context.PageMode.IsExperienceEditor)
+{
+    <section class="ftco-counter img" id="section-counter">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-md-6 d-flex">
+                    <div class="img d-flex align-self-stretch" style="background-image:url(@Model.Item.Fields[Template.FunFacts.Field.FunFactsImage]);"></div>
+                </div>
+                <div class="col-md-6 pl-md-5 py-5">
+                    <div class="row justify-content-start pb-3">
+                        <div class="col-md-12 heading-section ftco-animate">
+                            <span class="subheading">@Html.Sitecore().Field(Template.FunFacts.Field.FunFactsSmallTitle.ToString())</span>
+                            <h2 class="mb-4">
+                                @Html.Sitecore().Field(Template.FunFacts.Field.FunFactsTitle.ToString())
+                            </h2>
+                            <p>
+                                @Html.Sitecore().Field(Template.FunFacts.Field.FunFactsSubtitle.ToString())
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var serviceslistitem in ServicesList)
+                        {
+                            <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
+                                <div class="block-18 text-center py-4 bg-light mb-4">
+                                    <div class="text">
+                                        <div class="icon d-flex justify-content-center align-items-center">
+                                            <span class="@serviceslistitem.Fields[Template.FunFacts.Field.ServicesIcon].Value"></span>
+                                        </div>
+                                        @Html.Sitecore().Field(Template.FunFacts.Field.ServicesTotalPeople.ToString(), serviceslistitem)
+                                        <strong class="number" data-number="30">0</strong>
+                                        <span>
+                                            @Html.Sitecore().Field(Template.FunFacts.Field.ServicesTitle.ToString(), serviceslistitem)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <section class="ftco-counter img" id="section-counter">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-md-6 d-flex">
+                    @if (Model.Item.FindFieldValue(Template.FunFacts.Field.FunFactsImage))
+                    {
+                        <div class="img d-flex align-self-stretch" style="background-image: url(@Model.Item.Fields[Template.FunFacts.Field.FunFactsImage]);"></div>
+                    }
+
+                </div>
+                <div class="col-md-6 pl-md-5 py-5">
+                    <div class="row justify-content-start pb-3">
+                        <div class="col-md-12 heading-section ftco-animate">
+                            @if (Model.Item.FindFieldValue(Template.FunFacts.Field.FunFactsSmallTitle))
+                            {
+                                <span class="subheading">@Model.Item.Fields[Template.FunFacts.Field.FunFactsSmallTitle]</span>
+                            }
+
+                            @if (Model.Item.FindFieldValue(Template.FunFacts.Field.FunFactsTitle))
+                            {
+                                <h2 class="mb-4">
+                                    @Model.Item.Fields[Template.FunFacts.Field.FunFactsTitle]
+                                </h2>
+                            }
+                            @if (Model.Item.FindFieldValue(Template.FunFacts.Field.FunFactsSubtitle))
+                            {
+                                <p>
+                                    @Model.Item.Fields[Template.FunFacts.Field.FunFactsSubtitle]
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    @if (ServicesList != null)
+                    {
+                        <div class="row">
+                            @foreach (var serviceslistitem in ServicesList)
+                            {
+                                <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
+                                    <div class="block-18 text-center py-4 bg-light mb-4">
+                                        <div class="text">
+                                            <div class="icon d-flex justify-content-center align-items-center">
+                                                <span class="@serviceslistitem.Fields[Template.FunFacts.Field.ServicesIcon].Value"></span>
+                                            </div>
+                                            @Html.Raw(serviceslistitem.Fields[Template.FunFacts.Field.ServicesTotalPeople].Value)
+                                           
+                                            <strong class="number" data-number="30">0</strong>
+                                            <span>
+                                                @serviceslistitem.Fields[Template.FunFacts.Field.ServicesTitle].Value
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+           
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+

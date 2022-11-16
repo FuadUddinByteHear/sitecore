@@ -1,0 +1,33 @@
+﻿@model Sitecore.Foundation.Common.Models.BasePageModel
+
+@if (Model != null)
+{
+    if (!string.IsNullOrEmpty(Model.PageTitle))
+    {
+        <title>@Model.PageTitle</title>
+        <meta property="og:title" content="@Model.PageTitle" />
+    }
+    if (!string.IsNullOrEmpty(Model.MetaKeyword))
+    {
+        <meta name="keywords" content="@Model.MetaKeyword" />
+    }
+    if (!string.IsNullOrEmpty(Model.MetaDescription))
+    {
+        <meta name="description" content="@Model.MetaDescription" />
+        <meta name="og:description" content="@Model.MetaDescription" />
+    }
+    if (!string.IsNullOrEmpty(Model.MetaRobots))
+    {
+        <meta name="robots" content="@Model.MetaRobots" />
+    }
+    <meta property="og:url" content="@Model.PageUrl" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="@Model.PageImage">
+    <meta property="og:image:url" content="@Model.PageImage">
+    if (!string.IsNullOrEmpty(Model.CanonicalUrl))
+    {
+        <link rel="canonical" href="@Model.CanonicalUrl" />
+    }
+}
+
+

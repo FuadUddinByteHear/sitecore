@@ -1,0 +1,55 @@
+﻿@using Sitecore.Foundation.Extension.Extension;
+@using Sitecore.Mvc
+@using Sitecore.Data.Items;
+@using Sitecore.Data.Fields;
+
+@model List<Sitecore.Feauture.Speaker.Models.SpeakerModel>
+
+@{
+    ViewBag.Title = "SpeakerList";
+}
+
+@if (Model != null)
+{
+    if (Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        <div class="row">
+            @foreach (var speaker in Model)
+            {
+                <div class="col-md-4 speaker">
+                    <img src="@Html.Sitecore().Field(Template.Speaker.Field.Profilepic.ToString(),speaker.SpeakerProfilePic)" class="img-fluid" alt="Colorlib HTML5 Template">
+                    <div class="text text-center pt-3">
+                        <h3>@Html.Sitecore().Field(Template.Speaker.Field.Speakername.ToString(), speaker.SpeakerName)</h3>
+                        <span class="position">@Html.Sitecore().Field(Template.Speaker.Field.SpeakerPost.ToString(), speaker.SpeakerOccupation)</span>
+                        <ul class="ftco-social mt-3">
+                            <li class="ftco-animate"><a href="@speaker.SpeakerTwitterLink"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="@speaker.SpeakerFacebookLink"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="@speaker.SpeakerInstagramLink"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var speaker in Model)
+            {
+                <div class="col-md-4 speaker">
+                    <img src="@speaker.SpeakerProfilePic" class="img-fluid" alt="Colorlib HTML5 Template">
+                    <div class="text text-center pt-3">
+                        <h3>@speaker.SpeakerName</h3>
+                        <span class="position">@speaker.SpeakerOccupation</span>
+                        <ul class="ftco-social mt-3">
+                            <li class="ftco-animate"><a href="@speaker.SpeakerTwitterLink"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="@speaker.SpeakerFacebookLink"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="@speaker.SpeakerInstagramLink"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+}

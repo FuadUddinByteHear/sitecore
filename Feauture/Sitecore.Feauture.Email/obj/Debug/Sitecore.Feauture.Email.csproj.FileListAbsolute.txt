@@ -1,0 +1,2 @@
+E:\Fuad Uddin Traning Period\Sitecore Protfolios\Sitecore\Event.Talk\Sitecore.Feauture.Email\obj\Debug\Sitecore.Feauture.Email.csproj.AssemblyReference.cache
+E:\Fuad Uddin Traning Period\Sitecore Protfolios\Sitecore\Event.Talk\Sitecore.Feauture.Email\obj\Debug\Sitecore.Feauture.Email.csproj.CoreCompileInputs.cache

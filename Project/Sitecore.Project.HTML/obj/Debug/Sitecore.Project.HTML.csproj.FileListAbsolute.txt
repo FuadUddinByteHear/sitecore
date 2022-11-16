@@ -1,0 +1,2 @@
+E:\Fuad Uddin Traning Period\Sitecore Protfolios\Sitecore\Event.Talk\Sitecore.Project.HTML\obj\Debug\Sitecore.Project.HTML.csproj.AssemblyReference.cache
+E:\Fuad Uddin Traning Period\Sitecore Protfolios\Sitecore\Event.Talk\Sitecore.Project.HTML\obj\Debug\Sitecore.Project.HTML.csproj.CoreCompileInputs.cache

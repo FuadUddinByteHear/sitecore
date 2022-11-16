@@ -1,0 +1,41 @@
+﻿@model List<Sitecore.Feauture.RecentBlog.Models.RecentBlogModel>
+@using Sitecore.Mvc.Presentation
+@{
+    var total = 0;
+    var totalviewslider = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
+    if (totalviewslider != null)
+    {
+        var totalshow = totalviewslider.Rendering.Parameters;
+        total =Int32.Parse(totalshow["TotalShow"]);
+    }
+}
+@if (Model != null)
+{
+    <div class="row d-flex">
+        @{
+            var Blogtotal = 0;
+            foreach (var RecentBlog in Model)
+            {
+                if (Blogtotal < total)
+                {
+                    <div class="col-md-4 d-flex ftco-animate">
+                        <div class="blog-entry justify-content-end">
+                            <a href="@RecentBlog.BolgLink" class="block-20" style="background-image: url('@RecentBlog.BlogImage');">
+                            </a>
+                            <div class="text p-4 float-right d-block">
+                                <div class="d-flex align-items-center pt-2 mb-4">
+                                  @Html.Raw(RecentBlog.BlogPublishedDate)
+                                </div>
+                                <h3 class="heading mt-2"><a href="@RecentBlog.BolgLink">@RecentBlog.BlogTitle</a></h3>
+                                <p>@RecentBlog.BolgNews</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                Blogtotal++;
+            }
+        }
+    </div>
+}
+
+

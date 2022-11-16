@@ -1,0 +1,55 @@
+﻿@using Sitecore.Mvc
+@model List<Sitecore.Feauture.EventSchuduleandticketpricing.Models.PricingModel>
+
+@if (Sitecore.Context.PageMode.IsExperienceEditor)
+{
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var PricingDetals in Model)
+            {
+                <div class="col-md-4 ftco-animate">
+                    <div class="block-7">
+                        <div class="text-center">
+                            <h2 class="heading">@Html.Sitecore().Field(Template.pricing.Field.PricingTitle.ToString(), PricingDetals)</h2>
+                            <span class="price"><sup>$</sup> <span class="number">@Html.Sitecore().Field(Template.pricing.Field.Price.ToString(), PricingDetals)</span></span>
+                            <span class="excerpt d-block">@Html.Sitecore().Field(Template.pricing.Field.PricingDetails.ToString(), PricingDetals)</span>
+
+                            <h3 class="heading-2 my-4">@Html.Sitecore().Field(Template.pricing.Field.FeaturesTitle.ToString(), PricingDetals)</h3>
+                            @Html.Raw(PricingDetals.Feautures)
+
+                            <a href="@PricingDetals.ButtonLink" class="btn btn-primary d-block px-2 py-3">@PricingDetals.ButtonTitle</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}
+else
+{
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var PricingDetals in Model)
+            {
+                <div class="col-md-4 ftco-animate">
+                    <div class="block-7">
+                        <div class="text-center">
+                            <h2 class="heading">@PricingDetals.FeautureTitle</h2>
+                            <span class="price"><sup>$</sup> <span class="number">@PricingDetals.Price</span></span>
+                            <span class="excerpt d-block">@PricingDetals.PricingDetails</span>
+
+                            <h3 class="heading-2 my-4">@PricingDetals.FeautureTitle</h3>
+                            @Html.Raw(PricingDetals.Feautures)
+
+                            <a href="@PricingDetals.ButtonLink" class="btn btn-primary d-block px-2 py-3">@PricingDetals.ButtonTitle</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}
+
+

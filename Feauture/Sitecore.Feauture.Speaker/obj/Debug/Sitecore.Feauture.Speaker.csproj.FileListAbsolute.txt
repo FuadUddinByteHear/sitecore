@@ -1,0 +1,2 @@
+E:\Fuad Uddin Traning Period\Sitecore Protfolios\Sitecore\Event.Talk\Sitecore.Feauture.Speaker\obj\Debug\Sitecore.Feauture.Speaker.csproj.AssemblyReference.cache
+E:\Fuad Uddin Traning Period\Sitecore Protfolios\Sitecore\Event.Talk\Sitecore.Feauture.Speaker\obj\Debug\Sitecore.Feauture.Speaker.csproj.CoreCompileInputs.cache

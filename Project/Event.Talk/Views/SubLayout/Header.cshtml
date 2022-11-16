@@ -1,0 +1,42 @@
+﻿@using Sitecore
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@model Sitecore.Mvc.Presentation.RenderingModel
+@{
+    var siteContext = SiteExtensions.GetContextSite();
+    var siteName = siteContext.GetStartItem().Parent.Name.Replace(" ", "");
+}
+<div class="tns-wrapper">
+    <div id="tns" class="container">
+        @Html.Sitecore().Rendering(Common.Constants.LinkMenu, new { Cacheable = true, Cache_VaryByData = true, Cache_VaryByLogin = true, Datasource = "/sitecore/content/" + siteName + "/Global/Links/Top Bar" })
+    </div>
+</div>
+<div class="container gns-wrapper">
+    <div class="row">
+        <div class="col-sm-2 col-8">
+            <span class="logo">
+                <a href="/">
+                    <img src="/assets/images/megamenu-drill-down-cta-spotlight/logo.svg" alt="Ibec logo" />
+                </a>
+            </span>
+        </div>
+        <div class="col-4 d-sm-none">
+            <button type="button" id="toggleMenu_drill_down" class="d-block d-sm-none">
+                <span class="bar"></span>
+                <span class="sr-only">menu button</span>
+            </button>
+        </div>
+        <nav role="navigation" aria-label="Main Menu" id="megaMenu_drill_down" class="col-sm-10">
+            @Html.Sitecore().Rendering(Common.Constants.MegaMenu, new { Cacheable = false, Cache_VaryByData = true, Cache_VaryByParameters = true, Datasource = "/sitecore/content/" + siteName + "/Global/Mega Menu" })
+            <div class="mobile-nav-items">
+                @Html.Sitecore().Rendering(Common.Constants.LinkMenu, new { Cacheable = true, Cache_VaryByData = true, Datasource = "/sitecore/content/" + siteName + "/Global/Links/Top Bar" })
+                <div class="input-group mobile-search">
+                    @Html.Sitecore().Rendering(Common.Constants.SearchBar, new { Cacheable = true, Cache_VaryByData = true })
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="search-grey-box">
+    <div class="container">
+    </div>
+</div>

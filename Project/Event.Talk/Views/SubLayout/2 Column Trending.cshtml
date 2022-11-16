@@ -1,0 +1,19 @@
+﻿@using Sitecore
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@model Sitecore.Mvc.Presentation.RenderingModel
+  <div class="row">
+    <div class="col-sm-4">
+        <div class="trending-items">
+            <h3>Trending</h3>
+            <ul class="trend-key-item-list">
+                @Html.Sitecore().DynamicPlaceholder("col-trending", Model.Rendering.GetUseStaticPlaceholderNames())
+            </ul>
+            <div class="show-more">
+                <a href="#/"><span class="svg-chev_Lblue"></span>Show more</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+      @Html.Sitecore().DynamicPlaceholder("col-wide-1", Model.Rendering.GetUseStaticPlaceholderNames())
+    </div>
+  </div>

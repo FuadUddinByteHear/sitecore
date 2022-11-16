@@ -1,0 +1,29 @@
+﻿@model List<Sitecore.Feauture.Testimonial.Models.TestimonialModel>
+
+@if (Model != null)
+{
+    <div class="row ftco-animate">
+        <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel ftco-owl">
+                @foreach (var testimonial in Model)
+                {
+                    <div class="item">
+                        <div class="testimony-wrap text-center py-4 pb-5">
+                            <div class="user-img mb-4" style="background-image: url(@testimonial.CustomerProfilePic)">
+                                <span class="quote d-flex align-items-center justify-content-center">
+                                    <i class="icon-quote-left"></i>
+                                </span>
+                            </div>
+                            <div class="text">
+                                <p class="mb-4">@testimonial.CustomerTestimonial</p>
+                                <p class="name">@testimonial.CustomerName</p>
+                                <span class="position">@testimonial.CustomerOccupation</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,102 @@
+﻿@using Sitecore.Foundation.Common
+@using Sitecore.Mvc
+@using Sitecore.Foundation.Extension.Extension
+
+@model Sitecore.Mvc.Presentation.RenderingModel
+
+@if (Model != null)
+{
+    if (Sitecore.Context.PageMode.IsExperienceEditor)
+    {
+        <div class="hero-wrap js-fullheight" style="background-image: url('@Model.Item.GetImageUrl(BasePage.BasePageTemplate.Field.PageImage)');" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                    @if (Model.Item.FindFieldValue(BasePage.Annoucement.Field.AnnoucementTitle) && Model.Item.FindFieldValue(BasePage.Annoucement.Field.AnnoucementDescription))
+                    {
+                        <div class="col-xl-10 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">@Html.Sitecore().Field(BasePage.Annoucement.Field.AnnoucementTitle.ToString())</h1>
+                            <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">@Html.Sitecore().Field(BasePage.Annoucement.Field.AnnoucementDescription.ToString())</p>
+                            <div id="timer" class="d-flex mb-3">
+                                <div class="time" id="days"></div>
+                                <div class="time pl-4" id="hours"></div>
+                                <div class="time pl-4" id="minutes"></div>
+                                <div class="time pl-4" id="seconds"></div>
+                            </div>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-9 ftco-animate pb-5">
+                            <h1 class="mb-3 bread">@Html.Sitecore().Field(BasePage.BasePageTemplate.Field.PageName.ToString())</h1>
+                            <p class="breadcrumbs"><span class="mr-2">Home <i class="ion-ios-arrow-forward"></i></span> <span>@Model.Item.Fields[BasePage.BasePageTemplate.Field.PageName]<i class="ion-ios-arrow-forward"></i></span></p>
+                        </div>
+                    }
+                
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="hero-wrap js-fullheight" style="background-image: url('@Model.Item.GetImageUrl(BasePage.BasePageTemplate.Field.PageImage)');" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                    @if (Model.Item.FindFieldValue(BasePage.Annoucement.Field.AnnoucementTitle) && Model.Item.FindFieldValue(BasePage.Annoucement.Field.AnnoucementDescription))
+                        {
+                            <div class="col-xl-10 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                                <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">@Html.Raw(@Model.Item.Fields[BasePage.Annoucement.Field.AnnoucementTitle].Value)</h1>
+                                <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">@Model.Item.Fields[BasePage.Annoucement.Field.AnnoucementDescription].Value</p>
+                                <div id="timer" class="d-flex mb-3">
+                                    <div class="time" id="days"></div>
+                                    <div class="time pl-4" id="hours"></div>
+                                    <div class="time pl-4" id="minutes"></div>
+                                    <div class="time pl-4" id="seconds"></div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-9 ftco-animate pb-5">
+                                <h1 class="mb-3 bread">@Html.Sitecore().Field(BasePage.BasePageTemplate.Field.PageName.ToString())</h1>
+                                <p class="breadcrumbs"><span class="mr-2">Home <i class="ion-ios-arrow-forward"></i></span> <span>@Model.Item.Fields[BasePage.BasePageTemplate.Field.PageName]<i class="ion-ios-arrow-forward"></i></span></p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+    }
+}
+<script>
+    function makeTimer() {
+
+        var endTime = new Date(@Model.Item.Fields[BasePage.Annoucement.Field.AvailableEnds].Value);
+        if (endTime != null)
+        {
+            endTime = (Date.parse(endTime) / 1000);
+
+            var now = new Date();
+            now = (Date.parse(now) / 1000);
+
+            var timeLeft = endTime - now;
+
+            var days = Math.floor(timeLeft / 86400);
+            var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+            var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+            var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+
+            if (hours < "10") { hours = "0" + hours; }
+            if (minutes < "10") { minutes = "0" + minutes; }
+            if (seconds < "10") { seconds = "0" + seconds; }
+
+            $("#days").html(days + "<span>Days</span>");
+            $("#hours").html(hours + "<span>Hours</span>");
+            $("#minutes").html(minutes + "<span>Minutes</span>");
+            $("#seconds").html(seconds + "<span>Seconds</span>");
+        }
+
+    }
+
+</script>

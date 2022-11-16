@@ -1,0 +1,30 @@
+﻿@model List<Sitecore.Feauture.Speaker.Models.SpeakerModel>
+
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-md-12 ftco-animate">
+            <div class="carousel-testimony owl-carousel">
+                @foreach (var speaker in Model)
+                {
+                    <div class="item">
+                        <div class="speaker">
+                            <img src="@speaker.SpeakerProfilePic" class="img-fluid" alt="Colorlib HTML5 Template">
+                            <div class="text text-center py-3">
+                                <h3>@speaker.SpeakerName</h3>
+                                <span class="position">@speaker.SpeakerOccupation</span>
+                                <ul class="ftco-social mt-3">
+                                    <li class="ftco-animate"><a href="@speaker.SpeakerTwitterLink"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="@speaker.SpeakerFacebookLink"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="@speaker.SpeakerInstagramLink"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+}

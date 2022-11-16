@@ -1,0 +1,11 @@
+﻿@using System.Web.UI.WebControls
+@using Sitecore
+@using Sitecore.Data.Items
+@using Sitecore.Foundation.Theming.Extensions
+@using Sitecore.Foundation.SitecoreExtensions.Extensions
+@model Sitecore.Mvc.Presentation.RenderingModel
+<section class="@Model.Rendering.GetSectionBlockClass()">
+    <div class="container">
+        @Html.Sitecore().DynamicPlaceholder("sectionblock", Model.Rendering.GetUseStaticPlaceholderNames())
+    </div>
+</section>

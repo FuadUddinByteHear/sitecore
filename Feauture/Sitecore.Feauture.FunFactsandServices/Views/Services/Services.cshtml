@@ -1,0 +1,50 @@
+﻿@using Sitecore.Mvc.Presentation;
+@using Sitecore.Data.Fields;
+@using Sitecore.Data.Items;
+@using Sitecore.Mvc
+@model  RenderingModel
+@{
+    MultilistField ServiceList = Model.Item.Fields[Template.Services.Field.ServiceList];
+    Item[] services = ServiceList.GetItems();
+}
+@if (Sitecore.Context.PageMode.IsExperienceEditor)
+{
+    <div class="row d-flex">
+        @foreach (var service in services)
+        {
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><span class=" @Html.Sitecore().Field(Template.Services.Field.Icon.ToString(),service)"></span></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">@Html.Sitecore().Field(Template.Services.Field.Title.ToString(), service)</h3>
+                        <p>
+                            @Html.Sitecore().Field(Template.Services.Field.Subtitle.ToString(), service)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    if (services != null)
+    {
+        <div class="row d-flex">
+            @foreach (var service in services)
+            {
+                <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services d-block">
+                        <div class="icon"><span class="@service.Fields[Template.Services.Field.Icon].Value"></span></div>
+                        <div class="media-body">
+                            <h3 class="heading mb-3">@service.Fields[Template.Services.Field.Title].Value</h3>
+                            <p>
+                                @service.Fields[Template.Services.Field.Subtitle].Value
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

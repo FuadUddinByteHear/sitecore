@@ -1,0 +1,47 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation;
+@model RenderingModel
+@{
+    var renderingcolor = Sitecore.Mvc.Presentation.RenderingContext.CurrentOrNull;
+    var Colorcode = "";
+    if (renderingcolor != null)
+    {
+        var color = renderingcolor.Rendering.Parameters;
+        Colorcode = color["Background Color"];
+    }
+    var title = Model.Item.Fields[Template.ExperienceBanner.Field.ExperienceBannerTitle].Value;
+}
+@if (Sitecore.Context.PageMode.IsExperienceEditor)
+{
+    <section class="ftco-section d-md-flex bg-light">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-7">
+                    <h2>@Html.Sitecore().Field(Template.ExperienceBanner.Field.ExperienceBannerTitle.ToString())</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="ftco-section d-md-flex bg-light">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-7">
+                    @if (!string.IsNullOrEmpty(title))
+                    {
+                        <h2>@title</h2>
+                                 
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<style>
+    .bg-light {
+        background-color: @Colorcode !important;
+    }
+</style>
